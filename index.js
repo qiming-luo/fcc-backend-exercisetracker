@@ -3,13 +3,17 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 
+app.use(require('morgan')('dev'));
+app.use(express.urlencoded({extended:true})); // body parser
 app.use(cors())
 app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
-
+// users router
+const userRouter = require('./userRouter');
+app.use('/api', userRouter);
 
 
 
