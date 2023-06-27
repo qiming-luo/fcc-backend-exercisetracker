@@ -1,0 +1,8 @@
+
+// db fullschema
+CREATE TABLE users (_id INTEGER PRIMARY KEY, username TEXT);
+CREATE TABLE user_exercise (user_id integer, description text, duration integer, date integer, foreign key(user_id) references users(_id));
+
+
+
+
