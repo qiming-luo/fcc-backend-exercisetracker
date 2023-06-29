@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
 const userRouter = require('./userRouter');
 app.use('/api', userRouter);
 
+// test log router
+const logRouter = require('./logRouter');
+app.use('/api', logRouter);
+
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {

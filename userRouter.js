@@ -14,6 +14,7 @@ router.post('/users', function(req, res){
     })
 })
 
+// post exercise
 router.post('/users/:_id/exercises', function(req, res){
     const id = req.params._id;
     const description = req.body.description;
@@ -30,7 +31,7 @@ router.post('/users/:_id/exercises', function(req, res){
     // store data to db . sqlite foreign key must be manully enforced!
     // because user_id is a foreign key, so if the posted _id doesn't existed in users table, insert query will fail, so no need to check if _id existed
     db.run('PRAGMA foreign_keys = on', function(){
-        db.get('insert into user_exercise values (?,?,?,?) returning *', [id, description, duration, date], function(err, row){
+        db.get('insert into user_exercise values (?,?,?,?) returning *', [id, description, duration, unixDate], function(err, row){
             if(err){
                 res.status(400).json({error: 'please check your _id'});
             }else{
@@ -50,4 +51,6 @@ router.post('/users/:_id/exercises', function(req, res){
     })
 })
 
-module.exports = router
+
+
+module.exports = router;
