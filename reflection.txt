@@ -1,2 +1,0 @@
-1. sqlite foreign key need to be manually enforced each time connecting to db
-2. sqlite3 lib db.run/get/all ---> each time only one query can be executed, if you must await its result to run other queries, chain them inside callback.
