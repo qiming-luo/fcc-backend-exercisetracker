@@ -14,7 +14,7 @@ router.get('/users/:_id/logs', function(req, res,next){
     // parse date string to unix
     const unixFrom = Date.parse(fromDate); // will be NaN if not provided
     const unixTo = Date.parse(toDate);
-    console.log(unixFrom, unixTo);
+    
 
     // get data from db and send
     db.serialize(()=>{
@@ -33,6 +33,7 @@ router.get('/users/:_id/logs', function(req, res,next){
                 // get exercise data
                 if((Object.keys(req.query)).length === 0){
                     db.all('SELECT description, duration, date FROM user_exercise WHERE user_id=?', [id], (err, rows)=>{
+                        objToSned.count = rows.length;
                         objToSned.log = rows;
                         res.json(objToSned);
                     })
@@ -53,5 +54,11 @@ router.get('/users/:_id/logs', function(req, res,next){
         })
     })// ens db serialize
 })//end router
+
+router.get('/users', function(req, res, next){
+    db.all('SELECT * FROM users', (err,rows)=>{
+        res.send(rows);
+    })
+})
 
 module.exports = router;
